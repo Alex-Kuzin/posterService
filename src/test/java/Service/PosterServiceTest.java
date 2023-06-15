@@ -4,8 +4,8 @@ import Domain.Poster;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class posterServiceTest {
-    posterService ps = new posterService();
+public class PosterServiceTest {
+    PosterService ps = new PosterService();
 
     Poster poster1 = new Poster("Бладшот");
     Poster poster2 = new Poster("Вперед");
@@ -14,6 +14,17 @@ public class posterServiceTest {
     Poster poster5 = new Poster("Человек-невидимка");
     Poster poster6 = new Poster("Тролли. Мировой тур");
     Poster poster7 = new Poster("Номер один");
+
+    @Test
+    public void addPoster() {
+        ;
+        ps.addPoster(poster6);
+        ps.addPoster(poster3);
+        ps.addPoster(poster7);
+        Poster[] expected = {poster6, poster3, poster7};
+        Poster[] actual = ps.getItems();
+        Assertions.assertArrayEquals(expected, actual);
+    }
 
     @Test
     public void findAll() {
@@ -31,19 +42,21 @@ public class posterServiceTest {
     }
 
     @Test
-    public void addPoster() {
-        ;
-        ps.addPoster(poster6);
+    public void findLastConstructWithoutValues() {
+        ps.addPoster(poster1);
+        ps.addPoster(poster2);
         ps.addPoster(poster3);
-        ps.addPoster(poster7);
-        Poster[] expected = {poster6, poster3, poster7};
-        Poster[] actual = ps.getItems();
+        ps.addPoster(poster4);
+        ps.addPoster(poster5);
+
+        Poster[] expected = {poster5, poster4, poster3, poster2, poster1};
+        Poster[] actual = ps.findLast();
         Assertions.assertArrayEquals(expected, actual);
     }
 
     @Test
-    public void findLast1() {
-        posterService ps = new posterService(7);
+    public void findLastLessLimit() {
+        PosterService ps = new PosterService(8);
         ps.addPoster(poster1);
         ps.addPoster(poster2);
         ps.addPoster(poster3);
@@ -58,26 +71,26 @@ public class posterServiceTest {
     }
 
     @Test
-    public void findLast2() {
+    public void findLastMoreLimit() {
+        PosterService ps = new PosterService(2);
         ps.addPoster(poster1);
         ps.addPoster(poster2);
         ps.addPoster(poster3);
-        ps.addPoster(poster4);
-        ps.addPoster(poster5);
 
-        Poster[] expected = {poster5, poster4, poster3, poster2, poster1};
+        Poster[] expected = {poster3, poster2};
         Poster[] actual = ps.findLast();
         Assertions.assertArrayEquals(expected, actual);
     }
 
     @Test
-    public void findLast3() {
-        posterService ps = new posterService();
+    public void findLastEqualLimit() {
+        PosterService ps = new PosterService(4);
         ps.addPoster(poster1);
         ps.addPoster(poster2);
         ps.addPoster(poster3);
+        ps.addPoster(poster4);
 
-        Poster[] expected = {poster3, poster2, poster1};
+        Poster[] expected = {poster4, poster3, poster2, poster1};
         Poster[] actual = ps.findLast();
         Assertions.assertArrayEquals(expected, actual);
     }

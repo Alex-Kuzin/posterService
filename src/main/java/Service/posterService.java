@@ -3,14 +3,14 @@ package Service;
 
 import Domain.Poster;
 
-public class posterService {
+public class PosterService {
     private int limit;
 
-    public posterService() {
+    public PosterService() {
         this.limit = 5;
     }
 
-    public posterService(int limit) {
+    public PosterService(int limit) {
         this.limit = limit;
     }
 
