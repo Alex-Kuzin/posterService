@@ -94,5 +94,46 @@ public class PosterServiceTest {
         Poster[] actual = ps.findLast();
         Assertions.assertArrayEquals(expected, actual);
     }
+    @Test
+    public void findLastMoreLimitConstructNoValue() {
+        PosterService ps = new PosterService();
+        ps.addPoster(poster1);
+        ps.addPoster(poster2);
+        ps.addPoster(poster3);
+        ps.addPoster(poster4);
+        ps.addPoster(poster5);
+        ps.addPoster(poster6);
+        ps.addPoster(poster7);
+
+        Poster[] expected = {poster7, poster6, poster5, poster4, poster3};
+        Poster[] actual = ps.findLast();
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void findLastLessLimitConstructNoValue() {
+        PosterService ps = new PosterService();
+        ps.addPoster(poster1);
+        ps.addPoster(poster2);
+        ps.addPoster(poster3);
+
+        Poster[] expected = {poster3, poster2, poster1};
+        Poster[] actual = ps.findLast();
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void findLastEqualLimitConstructNoValue() {
+        PosterService ps = new PosterService();
+        ps.addPoster(poster1);
+        ps.addPoster(poster2);
+        ps.addPoster(poster3);
+        ps.addPoster(poster4);
+        ps.addPoster(poster5);
+
+        Poster[] expected = {poster5, poster4, poster3, poster2, poster1};
+        Poster[] actual = ps.findLast();
+        Assertions.assertArrayEquals(expected, actual);
+    }
 }
 
